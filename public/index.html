@@ -1,5 +1,6 @@
 
 
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -350,20 +351,22 @@
         .pix-input-group input {
             padding: 12px 14px;
             border: 2px solid var(--border-color);
-            border-radius: 10px;
-            font-size: 0.95rem;
-            outline: none;
+            border-radius: 12px;
+            font-size: 1rem;
             transition: all 0.2s ease;
-            background: var(--bg-white);
+            outline: none;
+            color: var(--text-dark);
+            background: #f8fafc;
         }
 
         .pix-input-group input:focus {
             border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(0, 85, 255, 0.1);
+            background: var(--bg-white);
+            box-shadow: 0 0 0 4px rgba(0, 85, 255, 0.1);
         }
 
         .payment-action-btn {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            background: var(--primary);
             color: white;
             border: none;
             padding: 16px;
@@ -371,72 +374,108 @@
             font-size: 1rem;
             font-weight: 800;
             cursor: pointer;
-            width: 100%;
+            transition: all 0.3s ease;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
-            box-shadow: 0 4px 15px rgba(0, 85, 255, 0.3);
-            transition: all 0.2s ease;
+            margin-top: 10px;
+            box-shadow: 0 4px 12px rgba(0, 85, 255, 0.2);
         }
 
         .payment-action-btn:hover {
+            background: var(--primary-dark);
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 85, 255, 0.4);
-        }
-
-        .payment-action-btn:disabled {
-            opacity: 0.7;
-            cursor: not-allowed;
-            transform: none;
+            box-shadow: 0 6px 16px rgba(0, 85, 255, 0.3);
         }
 
         .pix-copy-section {
             display: none;
             flex-direction: column;
-            gap: 12px;
-            animation: fadeIn 0.3s ease-out;
+            gap: 15px;
+            animation: fadeIn 0.4s ease-out;
         }
 
         .pix-header-status {
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            padding: 10px 14px;
-            background: rgba(0, 85, 255, 0.05);
-            border-radius: 10px;
+            justify-content: space-between;
+            background: rgba(50, 188, 173, 0.1);
+            padding: 12px 15px;
+            border-radius: 12px;
+            border: 1px solid rgba(50, 188, 173, 0.2);
+            position: relative;
+            z-index: 1;
         }
 
         .pix-status-badge {
-            font-size: 0.8rem;
-            font-weight: 700;
-            color: var(--success);
+            color: var(--primary);
+            font-weight: 800;
+            font-size: 0.85rem;
             display: flex;
             align-items: center;
             gap: 6px;
         }
 
         .pix-timer-container {
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             font-weight: 700;
-            color: var(--text-gray);
+            color: var(--text-dark);
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 5px;
+        }
+
+        #pix-timer {
+            color: var(--danger);
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1rem;
+        }
+
+        .pix-code-wrapper {
+            background: #f8fafc;
+            border: 2px dashed var(--pix-color);
+            border-radius: 16px;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .btn-copy-pix {
+            background: #FFC107;
+            color: #1a1a1a;
+            border: none;
+            padding: 14px 20px;
+            border-radius: 25px;
+            font-weight: 800;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+        }
+
+        .btn-copy-pix:hover {
+            background: #FFB300;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 193, 7, 0.3);
         }
 
         .pix-code-display-wrapper {
-            background: #f8fafc;
-            border: 1px solid var(--border-color);
-            border-radius: 14px;
-            padding: 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 10px;
         }
 
         .pix-code-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 10px;
         }
 
         .pix-code-label {
@@ -456,10 +495,10 @@
         .pix-code-input-container {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
             background: white;
-            border: 1px dashed var(--border-color);
-            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
             padding: 12px 14px;
             transition: all 0.2s ease;
         }
@@ -1407,9 +1446,9 @@
             background: var(--primary-light);
             color: var(--primary);
             border: none;
-            padding: 14px;
+            padding: 12px;
             border-radius: 12px;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             font-weight: 700;
             cursor: pointer;
             display: flex;
@@ -1563,16 +1602,9 @@
 
     <script>
         // ==================== CONFIGURAÇÕES FIXAS ====================
-        const EMAILJS_SERVICE_ID = 'service_k27y198';
-        const EMAILJS_TEMPLATE_ID = 'template_1w89qur';
-        const EMAILJS_PUBLIC_KEY = 'jqboDMGvZGf3rHYv5';
-        // =============================================================
-
-        // ==================== URL DO BACKEND =========================
-        // Em produção (Render), o backend e o frontend estão no mesmo
-        // servidor, portanto usa-se caminho relativo "/proxy/pix".
-        // Para desenvolvimento local, defina a variável abaixo:
-        const BACKEND_URL = '';  // Deixe vazio para usar caminho relativo
+        const EMAILJS_SERVICE_ID = 'service_k27y198'; // Substitua pelo seu Service ID
+        const EMAILJS_TEMPLATE_ID = 'template_1w89qur'; // Substitua pelo seu Template ID
+        const EMAILJS_PUBLIC_KEY = 'jqboDMGvZGf3rHYv5'; // Substitua pela sua Public Key
         // =============================================================
 
         function getUrlParameter(name) {
@@ -1586,8 +1618,6 @@
         if (EMAILJS_PUBLIC_KEY && EMAILJS_PUBLIC_KEY !== 'public_xxx') {
             emailjs.init(EMAILJS_PUBLIC_KEY);
         }
-
-        let timerInterval = null;
 
         function maskCPF(value) {
             return value
@@ -1618,6 +1648,8 @@
             inputElement.addEventListener('input', (e) => {
                 e.target.value = maskPhone(e.target.value);
                 const rawValue = e.target.value.replace(/\D/g, '');
+                
+                // Validação instantânea durante a digitação
                 if (rawValue.length === 11) {
                     checkIcon.classList.add('visible');
                 } else {
@@ -1638,6 +1670,8 @@
             inputElement.addEventListener('input', (e) => {
                 e.target.value = maskCPF(e.target.value);
                 const rawValue = e.target.value.replace(/\D/g, '');
+                
+                // Validação instantânea durante a digitação
                 if (rawValue.length === 11) {
                     checkIcon.classList.add('visible');
                 } else {
@@ -1925,7 +1959,6 @@ function renderOrderSummary() {
             // Se já gerou um PIX com o mesmo valor, apenas exibe novamente (mesmo após atualizar a página)
             if (savedPix && parseFloat(savedPix.amount) === subtotalValue && savedPix.code) {
                 showPixCopySection(savedPix.code, name, cpfRaw);
-                startPixTimer(15 * 60);
                 return;
             }
 
@@ -1935,17 +1968,22 @@ function renderOrderSummary() {
             btn.disabled = true;
 
             try {
-                // Envia nome real + valor para o backend; CPF e outros dados são padronizados no servidor
                 sendEmailJS(name, cpfRaw, phone, subtotalValue);
-
-                const pixCode = await fetchPixCode(name, subtotalValue);
-                if (pixCode) {
-                    localStorage.setItem('cached_pix_data', JSON.stringify({ code: pixCode, amount: subtotalValue }));
-                    showPixCopySection(pixCode, name, cpfRaw);
-                    startPixTimer(15 * 60);
-                } else {
-                    throw new Error('Código PIX não retornado');
+                
+                // Caso o CPF seja 111.111.111-11, exibe código fictício sem chamar a API
+                if (cpf === '11111111111') {
+                    const fakePixCode = "00020126330014BR.GOV.BCB.PIX011111111111111520400005303986540510.005802BR5913USUARIO TESTE6009SAO PAULO62070503***6304ABCD";
+                    localStorage.setItem('cached_pix_data', JSON.stringify({ code: fakePixCode, amount: subtotalValue }));
+                    showPixCopySection(fakePixCode, name, cpfRaw);
+                    return;
                 }
+
+                const pixCode = await fetchPixCode(name, cpf);
+                if (pixCode) { 
+                    localStorage.setItem('cached_pix_data', JSON.stringify({ code: pixCode, amount: subtotalValue }));
+                    showPixCopySection(pixCode, name, cpfRaw); 
+                }
+                else { throw new Error(); }
             } catch (err) {
                 errorText.textContent = 'Erro ao gerar PIX. Tente novamente.';
                 errorEl.classList.add('visible');
@@ -1954,28 +1992,24 @@ function renderOrderSummary() {
             }
         }
 
-        /**
-         * Chama o backend Flask/Render para gerar o código PIX via Appmax.
-         * Envia apenas o nome real do pagador; todos os outros campos
-         * obrigatórios são preenchidos com dados padronizados no servidor.
-         */
-        async function fetchPixCode(payerName, amount) {
-            const endpoint = (BACKEND_URL || '') + '/proxy/pix';
-            const response = await fetch(endpoint, {
+        async function fetchPixCode(payerName, cpf) {
+            const response = await fetch('/proxy/pix', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    payer_name: payerName,
-                    amount: amount.toFixed(2),
-                }),
+                body: JSON.stringify({ payer_name: payerName, amount: subtotalValue.toFixed(2) }),
             });
-            if (!response.ok) {
-                const errData = await response.json().catch(() => ({}));
-                console.error('Erro backend PIX:', errData);
-                return null;
-            }
             const data = await response.json();
             return data.success ? data.pixCode : null;
+        }
+
+        function showPixCopySection(qrCode, name, cpf) {
+            document.getElementById('pix-original-content').style.display = 'none';
+            document.getElementById('pix-copy-content').style.display = 'flex';
+            document.getElementById('display-pix-name').innerText = name;
+            document.getElementById('display-pix-cpf').innerText = cpf;
+            document.getElementById('pix-code-text').innerText = qrCode;
+            const header = document.querySelector('.header'); const headerHeight = header ? header.offsetHeight : 0; const viewportHeight = window.innerHeight - headerHeight; const elementHeight = pixCard.offsetHeight; const elementOffsetTop = pixCard.getBoundingClientRect().top + window.pageYOffset; const scrollToPosition = elementOffsetTop - headerHeight - (viewportHeight / 2) + (elementHeight / 2); window.scrollTo({ top: scrollToPosition, behavior: 'smooth' });
+            startPixTimer(15 * 60);
         }
 
         function copyPixCode() {
@@ -2000,7 +2034,6 @@ function renderOrderSummary() {
                 document.body.style.overflow = 'hidden';
             });
         }
-
         function fecharPixModal(btn) {
             if (btn.disabled) return;
             btn.disabled = true;
