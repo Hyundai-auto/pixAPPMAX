@@ -9,8 +9,8 @@ app.use(express.json());
 app.use(express.static('public'));
 
 // ================= CONFIGURAÇÃO =================
-const PUSHINPAY_TOKEN = 'nbxYz2chBU8At3rs0OZndmUJpZxkTn6QGBQ2JsFg4ef23887'; 
-const PUSHINPAY_API_URL = 'https://api.pushinpay.com.br/api/pix';
+const PUSHINPAY_TOKEN = '66379|nbxYz2chBU8At3rs0OZndmUJpZxkTn6QGBQ2JsFg4ef23887'; 
+const PUSHINPAY_API_URL = 'https://app.theneo.io/pushinpay/pix/criar-pix';
 // ================================================
 
 app.get('/', (req, res ) => {
