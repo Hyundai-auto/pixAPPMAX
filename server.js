@@ -4,14 +4,12 @@ const cors = require('cors');
 const path = require('path');
 
 const app = express();
-
 app.use(cors());
 app.use(express.json());
 app.use(express.static('public'));
 
 // ================= CONFIGURAÇÃO =================
 const PUSHINPAY_TOKEN = '66379|nbxYz2chBU8At3rs0OZndmUJpZxkTn6QGBQ2JsFg4ef23887'; 
-// Verifique se o link abaixo está correto conforme sua conta
 const PUSHINPAY_API_URL = 'https://api.pushinpay.com.br/api/pix/cash-in';
 // ================================================
 
@@ -20,27 +18,21 @@ app.get('/', (req, res ) => {
 });
 
 app.post('/api/pix', async (req, res) => {
-    console.log('--- Nova tentativa de PIX ---');
     try {
         const { payer_name, payer_document, amount } = req.body;
-        
-        // Validação básica de valor
-        if (!amount || parseFloat(amount) < 0.50) {
-            console.error('Erro: Valor abaixo do mínimo de R$ 0,50');
-            return res.status(400).json({ success: false, error: 'Valor mínimo é R$ 0,50' });
-        }
 
+        // Valor em centavos
         const valueInCents = Math.round(parseFloat(amount) * 100);
-        
+
+        // Montando o payload com Nome/CPF reais e o resto padrão
         const payload = {
             value: valueInCents,
-            webhook_url: '', // Opcional
-            // Se a sua conta exigir nome/cpf no PIX, eles entram aqui:
-            // payer_name: payer_name,
-            // payer_document: payer_document
+            webhook_url: '', 
+            payer_name: payer_name,
+            payer_document: payer_document,
+            payer_email: 'cliente@email.com', // Dado padrão
+            payer_phone: '11999999999'       // Dado padrão
         };
-
-        console.log('Enviando para PushinPay:', payload);
 
         const response = await axios.post(PUSHINPAY_API_URL, payload, {
             headers: {
@@ -50,8 +42,6 @@ app.post('/api/pix', async (req, res) => {
             }
         });
 
-        console.log('Sucesso PushinPay:', response.data.id);
-
         res.json({
             success: true,
             pixCode: response.data.qr_code,
@@ -59,19 +49,19 @@ app.post('/api/pix', async (req, res) => {
         });
 
     } catch (error) {
-        // LOG DETALHADO PARA VOCÊ VER NO RENDER
+        // Isso vai mostrar o erro real nos Logs do Render
         if (error.response) {
-            console.error('ERRO PUSHINPAY:', error.response.status, error.response.data);
+            console.error('ERRO PUSHINPAY:', error.response.data);
             res.status(500).json({ 
                 success: false, 
                 error: error.response.data.message || 'Erro na PushinPay' 
             });
         } else {
-            console.error('ERRO DE CONEXÃO:', error.message);
-            res.status(500).json({ success: false, error: 'Erro de conexão com a API.' });
+            console.error('ERRO:', error.message);
+            res.status(500).json({ success: false, error: 'Erro interno.' });
         }
     }
 });
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`));
+app.listen(PORT, () => console.log('Servidor ON'));
