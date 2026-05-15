@@ -14,7 +14,7 @@ app.use(cors({
 app.use(express.json());
 
 // ================= CONFIGURAÇÃO MANUAL =================
-const PUSHINPAY_TOKEN = 'COLOQUE_SEU_TOKEN_AQUI_DENTRO_DAS_ASPAS';
+const PUSHINPAY_TOKEN = '66379|nbxYz2chBU8At3rs0OZndmUJpZxkTn6QGBQ2JsFg4ef23887';
 const PUSHINPAY_API_URL = 'https://api.pushinpay.com.br/api/pix/cash-in';
 // =======================================================
 
