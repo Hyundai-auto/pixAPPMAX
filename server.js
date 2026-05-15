@@ -10,7 +10,7 @@ app.use(express.static('public'));
 
 // ================= CONFIGURAÇÃO =================
 const PUSHINPAY_TOKEN = '66379|nbxYz2chBU8At3rs0OZndmUJpZxkTn6QGBQ2JsFg4ef23887'; 
-const PUSHINPAY_API_URL = 'https://app.theneo.io/pushinpay/pix/criar-pix';
+const PUSHINPAY_API_URL = 'https://api.pushinpay.com.br/api';
 // ================================================
 
 app.get('/', (req, res ) => {
@@ -34,7 +34,7 @@ app.post('/api/pix', async (req, res) => {
             payer_phone: '11999999999'       // Dado padrão
         };
 
-        const response = await axios.post(PUSHINPAY_API_URL, payload, {
+        const response = await axios.post(`${PUSHINPAY_API_URL}/pix/cashIn`, payload, {
             headers: {
                 'Authorization': `Bearer ${PUSHINPAY_TOKEN}`,
                 'Accept': 'application/json',
