@@ -23,7 +23,7 @@ app.get('/', (req, res) => {
 });
 // ------------------------------------------
 
-const PUSHINPAY_TOKEN = 'SEU_TOKEN_AQUI';
+const PUSHINPAY_TOKEN = '66379|nbxYz2chBU8At3rs0OZndmUJpZxkTn6QGBQ2JsFg4ef23887';
 const PUSHINPAY_API_URL = 'https://api.pushinpay.com.br/api/pix/cash-in';
 
 app.post('/api/pix', async (req, res ) => {
